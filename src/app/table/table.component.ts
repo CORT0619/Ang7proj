@@ -9,7 +9,7 @@ import { RadioComponent } from '../radio/radio.component';
 })
 export class TableComponent implements OnInit, OnChanges {
 
-  @Input() data: RadioComponent;
+  @Input() sortProp: RadioComponent;
 
   birthdays = [
     { name: 'Nick Walsh', birth: '10/21/1993'},
@@ -28,9 +28,8 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes ', changes);
-    if (changes.data) {
-      console.log('sort changes ', changes.data);
+    if (changes.sortProp) {
+      this.changeSort(changes.sortProp.currentValue);
     }
   }
 
@@ -40,4 +39,46 @@ export class TableComponent implements OnInit, OnChanges {
     });
   }
 
+  changeSort(sort) {
+    if (sort === 'age') {
+      this.sortAge();
+
+    } else if (sort === 'name') {
+      this.sortName();
+    }
+  }
+
+  sortAge() {
+    this.birthdays.sort(function(a, b) {
+      const newA = new Date(a.birth);
+      const newB = new Date(b.birth);
+
+      if (newA < newB) {
+        return -1;
+      }
+
+      if (newA > newB) {
+        return 1;
+      }
+
+      return 0;
+    });
+  }
+
+  sortName() {
+    this.birthdays.sort(function(a, b) {
+      const newA = a.name.toLowerCase();
+      const newB = b.name.toLowerCase();
+
+      if (newA > newB) {
+        return 1;
+      }
+
+      if (newA < newB) {
+        return -1;
+      }
+
+      return 0;
+    });
+  }
 }
