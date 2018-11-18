@@ -1,6 +1,6 @@
 import { Component, OnChanges, SimpleChanges, Input, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { DataService } from '../data.service';
+import { RadioComponent } from '../radio/radio.component';
 
 @Component({
   selector: 'app-table',
@@ -9,7 +9,7 @@ import { DataService } from '../data.service';
 })
 export class TableComponent implements OnInit, OnChanges {
 
-  @Input() sortProp: string;
+  @Input() data: RadioComponent;
 
   birthdays = [
     { name: 'Nick Walsh', birth: '10/21/1993'},
@@ -21,18 +21,16 @@ export class TableComponent implements OnInit, OnChanges {
     { name: 'Poppy Popperton', birth: '11/21/1982'},
   ];
 
-  constructor (
-    private dataServ: DataService
-  ) { }
+  constructor () { }
 
   ngOnInit() {
     this.birthToRead();
-    this.dataServ.getData();
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.sortProp) {
-      console.log('sort changes ', changes.sortProp);
+    console.log('changes ', changes);
+    if (changes.data) {
+      console.log('sort changes ', changes.data);
     }
   }
 

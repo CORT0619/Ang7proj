@@ -1,2 +1,4 @@
 <app-radio #data></app-radio>
-<app-table [sortProp]="data"></app-table>
+<app-table [data]="data.model.value"></app-table>
+
+{{data | json}}

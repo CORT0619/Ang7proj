@@ -1,5 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { DataService } from '../data.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-radio',
@@ -8,24 +7,14 @@ import { DataService } from '../data.service';
 })
 export class RadioComponent {
 
-  @Output() radioOut: EventEmitter<string> = new EventEmitter<string>();
-
   model = {
     value: ''
   };
 
-  constructor(
-    private dataService: DataService
-  ) { }
+  constructor() { }
 
-  getModelValue(/*event*/) {
-    // console.log('event ', event);
+  getModelValue() {
     console.log('model.value ', this.model.value);
     return this.model.value;
-  }
-
-  emitVal() {
-    this.dataService.setData(this.getModelValue());
-    // this.radioOut.emit(this.getModelValue());
   }
 }
